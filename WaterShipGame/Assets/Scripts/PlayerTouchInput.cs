@@ -29,7 +29,6 @@ public class PlayerTouchInput : MonoBehaviour
     ITouchable checkIfTouchableObjectWasTouched(Touch touch)
     {
         RaycastHit hit;
-
         bool touchableObjectHit = rayCastInTouchDirection(touch.position, out hit);
 
         if (touchableObjectHit)
