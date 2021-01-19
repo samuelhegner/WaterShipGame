@@ -28,10 +28,9 @@ public class PlayerTouchInput : MonoBehaviour
 
     ITouchable checkIfTouchableObjectWasTouched(Touch touch)
     {
-        Vector3 touchScreenToWorldDirection = gameCamera.ScreenToWorldPoint(touch.position);
         RaycastHit hit;
 
-        bool touchableObjectHit = rayCastInTouchDirection(touchScreenToWorldDirection, out hit);
+        bool touchableObjectHit = rayCastInTouchDirection(touch.position, out hit);
 
         if (touchableObjectHit)
         {
@@ -43,9 +42,9 @@ public class PlayerTouchInput : MonoBehaviour
         }
     }
 
-    private bool rayCastInTouchDirection(Vector3 touchScreenToWorldDirection, out RaycastHit hit)
+    private bool rayCastInTouchDirection(Vector3 touchScreenPosition, out RaycastHit hit)
     {
-        Ray ray = new Ray(gameCamera.transform.position, touchScreenToWorldDirection);
+        Ray ray = gameCamera.ScreenPointToRay(touchScreenPosition);
         return Physics.Raycast(ray, out hit, 100f, touchableObjectsMask);
     }
 
