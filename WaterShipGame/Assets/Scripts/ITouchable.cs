@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public interface ITouchable
+﻿public interface ITouchable
 {
     void OnTouchDown();
     void OnTouchHeld();

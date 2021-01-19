@@ -9,6 +9,8 @@ public class PlayerTouchInput : MonoBehaviour
 
     [SerializeField] LayerMask touchableObjectsMask;
 
+    [SerializeField] float rayCastMaximumDistance = 100f;
+
     private void Update()
     {
         for (int i = 0; i < Input.touchCount; i++)
@@ -23,8 +25,6 @@ public class PlayerTouchInput : MonoBehaviour
             }
         }
     }
-
-    
 
     ITouchable checkIfTouchableObjectWasTouched(Touch touch)
     {
@@ -44,8 +44,8 @@ public class PlayerTouchInput : MonoBehaviour
 
     private bool rayCastInTouchDirection(Vector3 touchScreenPosition, out RaycastHit hit)
     {
-        Ray ray = gameCamera.ScreenPointToRay(touchScreenPosition);
-        return Physics.Raycast(ray, out hit, 100f, touchableObjectsMask);
+        Ray rayFromCameraToTouchInWorldPosition = gameCamera.ScreenPointToRay(touchScreenPosition);
+        return Physics.Raycast(rayFromCameraToTouchInWorldPosition, out hit, rayCastMaximumDistance, touchableObjectsMask);
     }
 
     private void ProcessTouchedObject(Touch currentTouch, ITouchable touchedObject)
