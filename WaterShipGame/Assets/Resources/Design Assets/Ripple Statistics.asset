@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ripple Statistics
   m_EditorClassIdentifier: 
   sizeIncreaseSpeed: 2
-  maximumRippleSize: 0
+  maximumRippleSize: 5
   maximumPushForce: 0
   minimumPushForce: 0

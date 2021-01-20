@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,5 +15,16 @@ public class PushObjectsAway : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (colliderIsNotPushable(other))
+            return;
+    }
+
+    private bool colliderIsNotPushable(Collider collider)
+    {
+        collider.GetComponent<>
     }
 }
