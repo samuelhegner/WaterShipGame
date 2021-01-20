@@ -25,6 +25,6 @@ public class PushObjectsAway : MonoBehaviour
 
     private bool colliderIsNotPushable(Collider collider)
     {
-        collider.GetComponent<>
+        return collider.GetComponent<IPushable>() == null;
     }
 }
