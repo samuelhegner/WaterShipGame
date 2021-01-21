@@ -1,18 +1,23 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnRipple : MonoBehaviour
+public class SpawnRipple : MonoBehaviour, ITouchable
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject ripplePrefab;
+
+    
+    public void OnTouchDown(Vector3 touchPointInWorldSpace)
     {
-        
+        GameObject newRipple = Instantiate(ripplePrefab, touchPointInWorldSpace, Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnTouchHeld(Vector3 touchPointInWorldSpace)
     {
-        
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnTouchRelease(Vector3 touchPointInWorldSpace)
+    {
+        //throw new System.NotImplementedException();
     }
 }

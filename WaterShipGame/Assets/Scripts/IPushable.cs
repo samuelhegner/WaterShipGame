@@ -3,5 +3,7 @@ using UnityEngine;
 
 public interface IPushable
 {
-    void addToPushForce(Vector3 pushForceToAdd);
+    bool isKinematic();
+
+    void AddForceToRigidBody(float forceToAdd, Vector3 forceDirection);
 }

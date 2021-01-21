@@ -4,20 +4,24 @@ using UnityEngine;
 
 public abstract class PushableObject : MonoBehaviour, IPushable
 {
+    protected Rigidbody objectRigidbody;
+
     [SerializeField] ForceMode forceModeToUse;
 
-    Vector3 pushForce;
-
-    Rigidbody rigidbody;
-    
-    public void addToPushForce(Vector3 pushForceToAdd)
+    private void Start()
     {
-        pushForce += pushForceToAdd;
+        objectRigidbody = GetComponent<Rigidbody>();
     }
 
-
-    void Update() 
+    public void AddForceToRigidBody(float forceToAdd, Vector3 forceDirection)
     {
-        
+        Vector3 directionalForce = forceDirection * forceToAdd;
+
+        objectRigidbody.AddForce(directionalForce, forceModeToUse);
+    }
+
+    public bool isKinematic()
+    {
+        return objectRigidbody.isKinematic;
     }
 }

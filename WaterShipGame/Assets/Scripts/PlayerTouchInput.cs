@@ -17,18 +17,19 @@ public class PlayerTouchInput : MonoBehaviour
         {
             Touch currentTouch = Input.touches[i];
 
-            ITouchable touchedObject = checkIfTouchableObjectWasTouched(currentTouch);
+            RaycastHit hit;
+
+            ITouchable touchedObject = checkIfTouchableObjectWasTouched(currentTouch, out hit);
 
             if (touchedObject != null)
             {
-                ProcessTouchedObject(currentTouch, touchedObject);
+                ProcessTouchedObject(currentTouch, touchedObject, hit);
             }
         }
     }
 
-    ITouchable checkIfTouchableObjectWasTouched(Touch touch)
+    ITouchable checkIfTouchableObjectWasTouched(Touch touch, out RaycastHit hit)
     {
-        RaycastHit hit;
         bool touchableObjectHit = rayCastInTouchDirection(touch.position, out hit);
 
         if (touchableObjectHit)
@@ -47,21 +48,21 @@ public class PlayerTouchInput : MonoBehaviour
         return Physics.Raycast(rayFromCameraToTouchInWorldPosition, out hit, rayCastMaximumDistance, touchableObjectsMask);
     }
 
-    private void ProcessTouchedObject(Touch currentTouch, ITouchable touchedObject)
+    private void ProcessTouchedObject(Touch currentTouch, ITouchable touchedObject, RaycastHit hit)
     {
         switch (currentTouch.phase)
         {
             case TouchPhase.Began:
-                touchedObject.OnTouchDown();
+                touchedObject.OnTouchDown(hit.point);
                 break;
             case TouchPhase.Moved:
-                touchedObject.OnTouchHeld();
+                touchedObject.OnTouchHeld(hit.point);
                 break;
             case TouchPhase.Stationary:
-                touchedObject.OnTouchHeld();
+                touchedObject.OnTouchHeld(hit.point);
                 break;
             case TouchPhase.Ended:
-                touchedObject.OnTouchRelease();
+                touchedObject.OnTouchRelease(hit.point);
                 break;
             default:
                 break;
