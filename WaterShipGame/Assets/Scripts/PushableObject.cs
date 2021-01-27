@@ -13,7 +13,7 @@ public abstract class PushableObject : MonoBehaviour, IPushable
         objectRigidbody = GetComponent<Rigidbody>();
     }
 
-    public void AddForceToRigidBody(float forceToAdd, Vector3 forceDirection)
+    public void pushObject(float forceToAdd, Vector3 forceDirection)
     {
         Vector3 directionalForce = forceDirection * forceToAdd;
 

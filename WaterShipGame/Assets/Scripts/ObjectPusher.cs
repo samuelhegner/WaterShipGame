@@ -12,13 +12,18 @@ public class ObjectPusher : Ripple
         if (colliderIsNotPushable(pushableObject))
             return;
 
-        Vector3 forceDirection = calculateForceDirection(other.transform.position);
+        pushObject(pushableObject);
+    }
 
-        float distanceToPushableObject = Vector3.Distance(other.transform.position, transform.position);
+    private void pushObject(PushableObject pushableObject)
+    {
+        Vector3 forceDirection = calculateForceDirection(pushableObject.transform.position);
+
+        float distanceToPushableObject = Vector3.Distance(pushableObject.transform.position, transform.position);
 
         float forceAmmount = calculateForceAmmount(distanceToPushableObject);
 
-        pushableObject.AddForceToRigidBody(forceAmmount, forceDirection);
+        pushableObject.pushObject(forceAmmount, forceDirection);
     }
 
     private bool colliderIsNotPushable(IPushable pushableObject)

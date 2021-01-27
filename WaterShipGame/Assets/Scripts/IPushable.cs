@@ -5,5 +5,5 @@ public interface IPushable
 {
     bool isKinematic();
 
-    void AddForceToRigidBody(float forceToAdd, Vector3 forceDirection);
+    void pushObject(float forceToAdd, Vector3 forceDirection);
 }

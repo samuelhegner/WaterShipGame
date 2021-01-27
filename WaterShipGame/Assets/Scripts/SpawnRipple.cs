@@ -13,11 +13,9 @@ public class SpawnRipple : MonoBehaviour, ITouchable
 
     public void OnTouchHeld(Vector3 touchPointInWorldSpace)
     {
-        //throw new System.NotImplementedException();
     }
 
     public void OnTouchRelease(Vector3 touchPointInWorldSpace)
     {
-        //throw new System.NotImplementedException();
     }
 }
