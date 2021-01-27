@@ -9,6 +9,8 @@ public class ShipRotator : MonoBehaviour
 
     Rigidbody objectRigidbody;
 
+    float minSpeedForRotation = 0.1f;
+
     private void Start()
     {
         objectRigidbody = GetComponent<Rigidbody>();
@@ -22,7 +24,7 @@ public class ShipRotator : MonoBehaviour
 
     private bool canShipRotate()
     {
-        return shipStatistics.turnInMovementDirection && objectRigidbody.velocity.magnitude > 0;
+        return shipStatistics.turnInMovementDirection && objectRigidbody.velocity.magnitude > minSpeedForRotation;
     }
 
     private void rotateShipInMovingDirection()

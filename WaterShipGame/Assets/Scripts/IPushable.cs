@@ -6,4 +6,7 @@ public interface IPushable
     bool isKinematic();
 
     void pushObject(float forceToAdd, Vector3 forceDirection);
+
+    void bounceObject(Collision info);
+    
 }
