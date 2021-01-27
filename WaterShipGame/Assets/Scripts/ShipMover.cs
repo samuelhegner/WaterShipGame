@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class ShipMover : PushableObject
 {
-    [SerializeField][Range(0,100)] float percentageOfVelocityLost = 0;
+    [SerializeField][Range(0,1)] float velocityDamping = 0;
     private void Update()
     {
         // Todo: fix this function to work properly
         
-        //loseVelocityOverTime();
+        loseVelocityOverTime();
     }
 
     private void loseVelocityOverTime()
     {
-        if (percentageOfVelocityLost != 0) 
+        if (velocityDamping != 0) 
         {
-            float percentageMultiplicationAmmount = ((100f - percentageOfVelocityLost) / 100f);
-            objectRigidbody.velocity = objectRigidbody.velocity * percentageMultiplicationAmmount * Time.deltaTime;
+            //float percentageMultiplicationAmmount = ((100f - percentageOfVelocityLost) / 100f);
+            
+
+            objectRigidbody.velocity -= (velocityDamping * objectRigidbody.velocity * Time.deltaTime);
 
         }
     }
