@@ -2,8 +2,10 @@
 using UnityEngine;
 
 
-public abstract class PushableObject : MonoBehaviour, IPushable
+public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
 {
+    [SerializeField] [Range(0, 1)] float velocityDamping = 0.2f;
+
     protected Rigidbody objectRigidbody;
 
     [SerializeField] ForceMode forceModeToUse;
@@ -57,5 +59,14 @@ public abstract class PushableObject : MonoBehaviour, IPushable
         Vector3 fromColisionPoint = transform.position - pointOfCollisionOnPlane;
 
         return (Vector3.Dot(fromColisionPoint, objectRigidbody.velocity) < 0);
+    }
+
+
+    public virtual void loseVelocityOverTime()
+    {
+        if (velocityDamping != 0)
+        {
+            objectRigidbody.velocity -= (velocityDamping * objectRigidbody.velocity * Time.deltaTime);
+        }
     }
 }
