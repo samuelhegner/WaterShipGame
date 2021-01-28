@@ -8,7 +8,7 @@ public abstract class PushableObject : MonoBehaviour, IPushable
 
     [SerializeField] ForceMode forceModeToUse;
 
-    [SerializeField] float minimumBounceSpeed = 1f;
+    [SerializeField] float minimumBounceSpeed = 10f;
 
     private void Start()
     {
@@ -27,12 +27,35 @@ public abstract class PushableObject : MonoBehaviour, IPushable
         return objectRigidbody.isKinematic;
     }
 
-    public virtual void bounceObject(Collision collisionInfo)
+    public virtual void bounceObject(Plane planeOfReflection)
     {
-        float reflectionSpeed = objectRigidbody.velocity.magnitude + minimumBounceSpeed;
-        Vector3 reflectionDirection = Vector3.Reflect(objectRigidbody.velocity.normalized, collisionInfo.contacts[0].normal);
-        reflectionDirection.y = 0;
+        if (velocityIsGoingInOposingDirection(planeOfReflection)) {
+            float reflectionSpeed = calculateReflectionSpeed();
+            Vector3 reflectionDirection = calculateReflectionOffPlane(planeOfReflection);
+            objectRigidbody.velocity = reflectionDirection * reflectionSpeed;
+        }
+    }
+
+    float calculateReflectionSpeed() 
+    {
+        float speed = objectRigidbody.velocity.magnitude + minimumBounceSpeed;
+        return speed;
+    }
+
+    Vector3 calculateReflectionOffPlane(Plane planeOfReflection) 
+    {
+        Vector3 reflectionDirection = Vector3.Reflect(objectRigidbody.velocity.normalized, planeOfReflection.normal);
+        reflectionDirection = Vector3.ProjectOnPlane(reflectionDirection, Vector3.up);
         reflectionDirection = Vector3.Normalize(reflectionDirection);
-        objectRigidbody.velocity = reflectionDirection * reflectionSpeed;
+
+        return reflectionDirection;
+    }
+
+    bool velocityIsGoingInOposingDirection(Plane planeOfReflection) 
+    {
+        Vector3 pointOfCollisionOnPlane = planeOfReflection.ClosestPointOnPlane(transform.position);
+        Vector3 fromColisionPoint = transform.position - pointOfCollisionOnPlane;
+
+        return (Vector3.Dot(fromColisionPoint, objectRigidbody.velocity) < 0);
     }
 }

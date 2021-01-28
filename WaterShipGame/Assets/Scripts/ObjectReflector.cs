@@ -5,17 +5,47 @@ using UnityEngine;
 
 public class ObjectReflector : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    Plane planeOfReflection;
+
+    Queue<PushableObject> recentlyBounced = new Queue<PushableObject>();
+
+    private void Start()
     {
-        PushableObject objectToReflect = collision.transform.GetComponent<PushableObject>();
-        if (objectToReflect != null) 
+        planeOfReflection = new Plane(transform.forward, transform.position);
+        StartCoroutine(clearBouncedObjects());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PushableObject objectToReflect = other.transform.GetComponent<PushableObject>();
+        if (objectToReflect != null && !recentlyBounced.Contains(objectToReflect))
         {
-            reflectObject(objectToReflect, collision);
+            recentlyBounced.Enqueue(objectToReflect);
+            reflectObject(objectToReflect);
         }
     }
 
-    private void reflectObject(PushableObject pushableObject, Collision collisionInfo)
+    
+
+    private void reflectObject(PushableObject pushableObject)
     {
-        pushableObject.bounceObject(collisionInfo);
+        pushableObject.bounceObject(planeOfReflection);
+    }
+
+    IEnumerator clearBouncedObjects() 
+    {
+        while (true) 
+        {
+            if (!recentBounceQueueIsEmpty()) 
+            {
+                recentlyBounced.Dequeue();
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    bool recentBounceQueueIsEmpty() 
+    {
+        return recentlyBounced.Count == 0;
     }
 }

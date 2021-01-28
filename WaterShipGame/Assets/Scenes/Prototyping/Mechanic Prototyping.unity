@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df232b5de565c4d4c9445e56db7b342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumBounceSpeed: 10
 --- !u!114 &68448936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +174,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68448934}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -274,7 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df232b5de565c4d4c9445e56db7b342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumBounceSpeed: 10
 --- !u!114 &208097927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +293,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208097925}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -486,7 +484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df232b5de565c4d4c9445e56db7b342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumBounceSpeed: 10
 --- !u!114 &742990888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +504,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742990886}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -805,7 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceModeToUse: 0
   minimumBounceSpeed: 1
-  velocityDamping: 0.1
+  velocityDamping: 0.2
 --- !u!114 &766011134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,7 +1179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df232b5de565c4d4c9445e56db7b342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumBounceSpeed: 10
 --- !u!114 &1001062295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1203,7 +1199,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001062293}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -1346,7 +1342,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736153736}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -1436,7 +1432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df232b5de565c4d4c9445e56db7b342f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumBounceSpeed: 10
 --- !u!1 &2125481801
 GameObject:
   m_ObjectHideFlags: 0

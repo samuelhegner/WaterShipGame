@@ -7,6 +7,6 @@ public interface IPushable
 
     void pushObject(float forceToAdd, Vector3 forceDirection);
 
-    void bounceObject(Collision info);
+    void bounceObject(Plane planeOfRefection);
     
 }
