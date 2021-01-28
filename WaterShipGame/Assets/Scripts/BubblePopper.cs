@@ -27,6 +27,6 @@ public class BubblePopper: MonoBehaviour, ITouchable, IDestroyable
 
     public void onDestroy()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
