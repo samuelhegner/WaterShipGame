@@ -1,10 +1,23 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.Assertions;
 
 public class BubblePopper: MonoBehaviour, ITouchable, IDestroyable
 {
     public Action bubblePopped;
 
+    private void OnEnable()
+    {
+        Health health = GetComponent<Health>();
+        Assert.IsNotNull(health);
+        health.objectDestroyed += popBubble;
+    }
+    private void OnDisable()
+    {
+        Health health = GetComponent<Health>();
+        Assert.IsNotNull(health);
+        health.objectDestroyed -= popBubble;
+    }
     public void OnTouchDown(Vector3 touchPointInWorldSpace)
     {
         popBubble();

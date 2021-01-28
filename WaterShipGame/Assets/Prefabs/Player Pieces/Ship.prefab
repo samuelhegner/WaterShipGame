@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4250170869783802451}
   - component: {fileID: 4250170869783802450}
   - component: {fileID: 4250170869783802449}
+  - component: {fileID: 766011128}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -124,9 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b42c151682a3a41aad10b257e87b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceModeToUse: 0
-  minimumBounceSpeed: 1
-  velocityDamping: 0.2
+  movementStatistics: {fileID: 11400000, guid: a5eadda4c84eb4c4c9e4acc78bca1ab1, type: 2}
 --- !u!114 &4250170869783802449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +139,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipStatistics: {fileID: 11400000, guid: a5eadda4c84eb4c4c9e4acc78bca1ab1, type: 2}
+--- !u!114 &766011128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4250170869783802456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba29e4cba8490504d9c798a0e204c723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 2

@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
 {
-    [SerializeField] [Range(0, 1)] float velocityDamping = 0.2f;
+    [SerializeField] private MovingObjectStatistics movementStatistics;
+    float velocityDamping = 0.2f;
 
     protected Rigidbody objectRigidbody;
 
-    [SerializeField] ForceMode forceModeToUse;
+    ForceMode forceModeToUse;
 
-    [SerializeField] float minimumBounceSpeed = 10f;
+    float minimumBounceSpeed = 10f;
 
     private void Start()
     {
+        getMovementStatistics();
         objectRigidbody = GetComponent<Rigidbody>();
     }
 
@@ -68,5 +69,12 @@ public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
         {
             objectRigidbody.velocity -= (velocityDamping * objectRigidbody.velocity * Time.deltaTime);
         }
+    }
+
+    public void getMovementStatistics() 
+    {
+        velocityDamping = movementStatistics.velocityDamping;
+        forceModeToUse = movementStatistics.forceModeToUse;
+        minimumBounceSpeed = movementStatistics.minimumBounceSpeed;
     }
 }
