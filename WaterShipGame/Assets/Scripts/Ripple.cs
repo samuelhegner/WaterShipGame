@@ -9,7 +9,7 @@ public abstract class Ripple : MonoBehaviour
 
     static bool searchedForFile = false;
 
-    string rippleStatisticsPath = "Design Assets/Ripple Statistics";
+    string rippleStatisticsPath = "Design Assets/Object Stats/Ripple Statistics";
 
     private void Awake()
     {

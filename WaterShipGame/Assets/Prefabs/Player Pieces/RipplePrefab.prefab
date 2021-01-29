@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7013692521482505377}
   - component: {fileID: 7013692521482505378}
   - component: {fileID: 7013692521482505379}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Disc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7013692521616531532}
   - component: {fileID: 7013692521616531531}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 7013692521768016430}
   - component: {fileID: 7013692521768016432}
   - component: {fileID: 1117984560}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RipplePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

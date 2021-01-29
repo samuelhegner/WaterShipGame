@@ -16,5 +16,6 @@ MonoBehaviour:
   forceModeToUse: 0
   minimumBounceSpeed: 2
   explosionRadius: 5
+  secondsBeforeExplosion: 0
   explosionMaximumDamage: 3
   explosionMinumumDamage: 1

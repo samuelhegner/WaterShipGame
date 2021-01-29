@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 1000907656}
   - component: {fileID: 1000907655}
   - component: {fileID: 1000907659}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ MonoBehaviour:
   gameCamera: {fileID: 963194227}
   touchableObjectsMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   rayCastMaximumDistance: 100
 --- !u!4 &1099925880
 Transform:
@@ -713,7 +713,8 @@ GameObject:
   - component: {fileID: 1136793654}
   - component: {fileID: 1136793657}
   - component: {fileID: 1136793658}
-  m_Layer: 0
+  - component: {fileID: 1136793659}
+  m_Layer: 10
   m_Name: ExplosiveBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -748,7 +749,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1136793653
 MonoBehaviour:
@@ -771,7 +772,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136793650}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -836,6 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d8ef899ab7d2346b05905542645c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrelStats: {fileID: 11400000, guid: c0f925703bcc43d4f819567c1d827cc7, type: 2}
 --- !u!114 &1136793658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,6 +851,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 2
+--- !u!114 &1136793659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136793650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e5d522ac7d4c94387eab929354dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionStats: {fileID: 11400000, guid: ac627ff7b80aa4d49989e435d4382dbc, type: 2}
 --- !u!1 &2125481801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,10 +1046,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 766011128, guid: d0d31ecae4745bb46abef353bf494f8e, type: 3}
-      propertyPath: startingHealth
-      value: 5
-      objectReference: {fileID: 0}
+    - target: {fileID: 31793942, guid: d0d31ecae4745bb46abef353bf494f8e, type: 3}
+      propertyPath: collisionStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 11db2e05a3943e44b9cddde104b20f0f,
+        type: 2}
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
       propertyPath: m_RootOrder
@@ -1043,7 +1059,7 @@ PrefabInstance:
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.62
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
@@ -1053,7 +1069,7 @@ PrefabInstance:
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.16
+      value: -1.86
       objectReference: {fileID: 0}
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
