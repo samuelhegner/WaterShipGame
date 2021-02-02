@@ -176,9 +176,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7013692521768016429}
-  - component: {fileID: 7013692521768016430}
-  - component: {fileID: 7013692521768016432}
   - component: {fileID: 1117984560}
+  - component: {fileID: 7013692521768016430}
+  - component: {fileID: 6738263000936867074}
   m_Layer: 11
   m_Name: RipplePrefab
   m_TagString: Untagged
@@ -202,32 +202,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7013692521768016430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7013692521768016433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 750c3d0ccd64b2c42a6f077ba554511f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rippleSphereCollider: {fileID: 7013692521616531531}
-  rippleVisualDisc: {fileID: 7013692521482505377}
---- !u!114 &7013692521768016432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7013692521768016433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf408cf2f88b41d4e8accfa9edc0e831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1117984560
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -244,3 +218,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7013692521768016430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013692521768016433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750c3d0ccd64b2c42a6f077ba554511f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rippleStatistics: {fileID: 11400000, guid: a42a97b468487e74f990981c1f5ded04, type: 2}
+  rippleSphereCollider: {fileID: 7013692521616531531}
+  rippleVisualDisc: {fileID: 7013692521482505377}
+--- !u!114 &6738263000936867074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7013692521768016433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a70ebd5ac6bcb44fb3a68194514acee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushingStats: {fileID: 11400000, guid: abe0ce4750d67f84d8b21aba67e1f45d, type: 2}
+  rippleStatistics: {fileID: 11400000, guid: a42a97b468487e74f990981c1f5ded04, type: 2}

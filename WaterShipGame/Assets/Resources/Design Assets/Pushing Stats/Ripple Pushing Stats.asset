@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b81ed0774da2f446bbfb7ce70ca374a, type: 3}
-  m_Name: Ripple Statistics
+  m_Script: {fileID: 11500000, guid: af1a4c8776e5b664ea48003d2cc5e886, type: 3}
+  m_Name: Ripple Pushing Stats
   m_EditorClassIdentifier: 
-  sizeIncreaseSpeed: 5
-  maximumRippleSize: 10
-  pushingStatistics: {fileID: 11400000, guid: abe0ce4750d67f84d8b21aba67e1f45d, type: 2}
+  maximumPushForce: 50
+  minimumPushForce: 10

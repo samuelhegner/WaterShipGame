@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
-public class ObjectPusher : Ripple
+
+public abstract class ObjectPusher : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        PushableObject pushableObject = other.GetComponent<PushableObject>();
+    [SerializeField] protected PushingStatistics pushingStats;
 
-        if (colliderIsNotPushable(pushableObject))
-            return;
-
-        pushObject(pushableObject);
-    }
-
-    private void pushObject(PushableObject pushableObject)
+    protected virtual void pushObject(PushableObject pushableObject)
     {
         Vector3 forceDirection = calculateForceDirection(pushableObject.transform.position);
 
@@ -26,12 +17,7 @@ public class ObjectPusher : Ripple
         pushableObject.pushObject(forceAmmount, forceDirection);
     }
 
-    private bool colliderIsNotPushable(IPushable pushableObject)
-    {
-        return pushableObject == null;
-    }
-
-    private Vector3 calculateForceDirection(Vector3 objectPosition)
+    protected virtual Vector3 calculateForceDirection(Vector3 objectPosition)
     {
         Vector3 direction = objectPosition - transform.position;
         direction = negateYComponent(direction);
@@ -39,24 +25,27 @@ public class ObjectPusher : Ripple
         return direction;
     }
 
-    private Vector3 negateYComponent(Vector3 vectorToNegate)
+    protected virtual Vector3 negateYComponent(Vector3 vectorToNegate)
     {
         vectorToNegate.y = 0;
         return vectorToNegate;
     }
 
-    private float calculateForceAmmount(float distanceToPushableObject)
+    protected virtual float calculateForceAmmount(float distanceToPushableObject)
     {
         float force = 0;
 
         force = FloatExtensions.Map(distanceToPushableObject
                                     , 0
-                                    , rippleStatistics.maximumRippleSize
-                                    , rippleStatistics.maximumPushForce
-                                    , rippleStatistics.minimumPushForce
+                                    , 100
+                                    , pushingStats.maximumPushForce
+                                    , pushingStats.minimumPushForce
                                     );
         return force;
     }
 
-
+    protected bool colliderIsNotPushable(IPushable pushableObject)
+    {
+        return pushableObject == null;
+    }
 }

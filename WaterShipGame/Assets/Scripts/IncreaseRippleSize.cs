@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Shapes;
 
-public class IncreaseRippleSize : Ripple
+public class IncreaseRippleSize : MonoBehaviour
 {
+    [SerializeField] private RippleStatistics rippleStatistics;
     [SerializeField] private SphereCollider rippleSphereCollider;
     [SerializeField] private Disc rippleVisualDisc;
 

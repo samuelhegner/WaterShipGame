@@ -8,7 +8,6 @@ public class RippleStatistics : ScriptableObject
     [Range(0.1f, 20f)]public float sizeIncreaseSpeed;
     [Range(0.1f, 20f)] public float maximumRippleSize;
 
-    [Header("Force Statistics")]
-    public float maximumPushForce;
-    public float minimumPushForce;
+    [Header("Push Force Statistics")]
+    public PushingStatistics pushingStatistics;
 }

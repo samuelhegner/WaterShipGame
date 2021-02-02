@@ -8,7 +8,7 @@ public class SpawnRipple : MonoBehaviour, ITouchable
     
     public void OnTouchDown(Vector3 touchPointInWorldSpace)
     {
-        GameObject newRipple = Instantiate(ripplePrefab, touchPointInWorldSpace, Quaternion.identity);
+        
     }
 
     public void OnTouchHeld(Vector3 touchPointInWorldSpace)
@@ -17,5 +17,6 @@ public class SpawnRipple : MonoBehaviour, ITouchable
 
     public void OnTouchRelease(Vector3 touchPointInWorldSpace)
     {
+        GameObject newRipple = Instantiate(ripplePrefab, touchPointInWorldSpace, Quaternion.identity);
     }
 }
