@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 965d611f48250444fb082ccc38c9f007, type: 3}
-  m_Name: Player Ship Statistics
+  m_Script: {fileID: 11500000, guid: af1a4c8776e5b664ea48003d2cc5e886, type: 3}
+  m_Name: Wave Pushing Stats
   m_EditorClassIdentifier: 
-  velocityDamping: 0.2
-  forceModeToUse: 0
-  minimumBounceSpeed: 1
-  maximumVelocity: 20
-  turnInMovementDirection: 1
-  turnSpeed: 5
+  maximumPushForce: 30
+  minimumPushForce: 1

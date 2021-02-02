@@ -12,10 +12,16 @@ public class WaveMover : MonoBehaviour
 
     public event Action reachedEndLocation;
 
-    Vector3 endLocationPoint;
-    float maxDistanceToMove;
+    private Vector3 endLocationPoint;
+    private float maxDistanceToMove;
 
+    public Vector3 getMovementDirection() 
+    {
+        Vector3 movementDirection = endLocationPoint - transform.position;
 
+        Vector3 flatNormalisedDirection = Vector3.ProjectOnPlane(movementDirection, Vector3.up).normalized;
+        return flatNormalisedDirection;
+    }
     
     void Start()
     {

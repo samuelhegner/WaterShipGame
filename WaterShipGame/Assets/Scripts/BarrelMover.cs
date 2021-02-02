@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class BarrelMover : PushableObject
 {
-    private void Update()
-    {
-        loseVelocityOverTime();
-    }
+    
 }

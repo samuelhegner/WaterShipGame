@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 
-
+[RequireComponent(typeof(Rigidbody))]
 public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
 {
     [SerializeField] private MovingObjectStatistics movementStatistics;
-    float velocityDamping = 0.2f;
-
     protected Rigidbody objectRigidbody;
-
-    ForceMode forceModeToUse;
-
-    float minimumBounceSpeed = 10f;
 
     private void Start()
     {
-        getMovementStatistics();
         objectRigidbody = GetComponent<Rigidbody>();
     }
 
@@ -22,7 +15,7 @@ public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
     {
         Vector3 directionalForce = forceDirection * forceToAdd;
 
-        objectRigidbody.AddForce(directionalForce, forceModeToUse);
+        objectRigidbody.AddForce(directionalForce, movementStatistics.forceModeToUse);
     }
 
     public bool isKinematic()
@@ -41,7 +34,7 @@ public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
 
     float calculateReflectionSpeed() 
     {
-        float speed = objectRigidbody.velocity.magnitude + minimumBounceSpeed;
+        float speed = objectRigidbody.velocity.magnitude + movementStatistics.minimumBounceSpeed;
         return speed;
     }
 
@@ -65,16 +58,23 @@ public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
 
     public virtual void loseVelocityOverTime()
     {
-        if (velocityDamping != 0)
+        if (movementStatistics.velocityDamping != 0)
         {
-            objectRigidbody.velocity -= (velocityDamping * objectRigidbody.velocity * Time.deltaTime);
+            objectRigidbody.velocity -= (movementStatistics.velocityDamping * objectRigidbody.velocity * Time.deltaTime);
         }
     }
 
-    public void getMovementStatistics() 
+    public virtual void clampVelocityAtMaximum()
     {
-        velocityDamping = movementStatistics.velocityDamping;
-        forceModeToUse = movementStatistics.forceModeToUse;
-        minimumBounceSpeed = movementStatistics.minimumBounceSpeed;
+        if (movementStatistics.maximumVelocity > 0)
+        {
+            objectRigidbody.velocity = Vector3.ClampMagnitude(objectRigidbody.velocity, movementStatistics.maximumVelocity);
+        }
+    }
+
+    public virtual void Update()
+    {
+        loseVelocityOverTime();
+        clampVelocityAtMaximum();
     }
 }
