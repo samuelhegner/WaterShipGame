@@ -28,13 +28,13 @@ public class EnemyShipMover : MonoBehaviour
 
         float mappedSpeed = FloatExtensions.Map(Mathf.Abs(angleToPlayer), 0, 180, maxSpeed, minSpeed);
 
-        angleToPlayer = Mathf.Clamp(angleToPlayer, -maxTurnAngle, maxTurnAngle) * Time.deltaTime;
+        angleToPlayer = Mathf.Clamp(angleToPlayer, -maxTurnAngle, maxTurnAngle) * Time.fixedDeltaTime;
 
         Vector3 movementDirection = Quaternion.AngleAxis(angleToPlayer, Vector3.up) * transform.forward;
 
         transform.forward = movementDirection;
 
-        enemyShipRigidbody.MovePosition(transform.position + (transform.forward * mappedSpeed * Time.deltaTime));
+        enemyShipRigidbody.MovePosition(transform.position + (transform.forward * mappedSpeed * Time.fixedDeltaTime));
     }
 
     
