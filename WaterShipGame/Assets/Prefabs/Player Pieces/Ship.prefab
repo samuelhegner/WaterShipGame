@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 766011128}
   m_Layer: 9
   m_Name: Ship
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 4250170869783802456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.62, y: 0.51, z: -1.16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e5d522ac7d4c94387eab929354dfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionStats: {fileID: 0}
+  collisionStats: {fileID: 11400000, guid: 11db2e05a3943e44b9cddde104b20f0f, type: 2}
 --- !u!114 &766011128
 MonoBehaviour:
   m_ObjectHideFlags: 0
