@@ -609,7 +609,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSpeed: 2
   maxSpeed: 4
-  maxTurnAngle: 100
+  maxTurnAngle: 180
+  currentState: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,7 +1166,7 @@ PrefabInstance:
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.91
       objectReference: {fileID: 0}
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
@@ -1175,7 +1176,7 @@ PrefabInstance:
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -12.88
       objectReference: {fileID: 0}
     - target: {fileID: 4250170869783802452, guid: d0d31ecae4745bb46abef353bf494f8e,
         type: 3}
