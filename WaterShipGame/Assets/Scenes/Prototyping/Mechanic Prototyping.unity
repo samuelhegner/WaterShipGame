@@ -557,6 +557,7 @@ GameObject:
   - component: {fileID: 953619708}
   - component: {fileID: 953619709}
   - component: {fileID: 953619710}
+  - component: {fileID: 953619711}
   m_Layer: 0
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -607,12 +608,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ee7a990afc9e54f96c0c55d8709b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 2
-  maxSpeed: 4
-  turningSpeedLossMultiplier: 0.435
+  turningSpeed: 5
+  chargeSpeed: 10
+  brakeSpeed: 2
+  accelerationSpeed: 5
   distanceToOvershootCharge: 5
-  maxTurnAngle: 45
+  turnSpeed: 0
   currentState: 0
+--- !u!114 &953619711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953619707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d846d18403a7945aed748288dde119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

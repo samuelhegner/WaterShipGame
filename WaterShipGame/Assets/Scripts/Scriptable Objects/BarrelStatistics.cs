@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Barrel Stats", menuName = "Barrel Statistics")]
-public class BarrelStatistics : MovingObjectStatistics
+public class BarrelStatistics : PushableObjectStatistics
 {
     [Header("Explosion Statistics")]
     public float explosionRadius = 5f;

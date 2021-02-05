@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
 {
-    [SerializeField] private MovingObjectStatistics movementStatistics;
+    [SerializeField] private PushableObjectStatistics movementStatistics;
     protected Rigidbody objectRigidbody;
 
     private void Start()

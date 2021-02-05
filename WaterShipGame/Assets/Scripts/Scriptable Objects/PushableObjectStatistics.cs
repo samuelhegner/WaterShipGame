@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MovingObjectStatistics : ScriptableObject
+public class PushableObjectStatistics : ScriptableObject
 {
     [Header("Movement Statistics")]
     public float velocityDamping = 0.2f;

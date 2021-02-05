@@ -6,14 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyShipMover : MonoBehaviour, ISleepState
 {
-
-
     [SerializeField] private float turningSpeed = 5f;
     [SerializeField] private float chargeSpeed = 10f;
     [SerializeField] private float brakeSpeed = 2f;
     [SerializeField] private float accelerationSpeed = 5f;
     [SerializeField] private float distanceToOvershootCharge = 5f;
-    [SerializeField] [Range(0, 180)] private float maxTurnAngle;
+    [SerializeField] [Range(0, 180)] private float turnSpeed;
     [SerializeField] MovementState currentState;
 
 
@@ -31,7 +29,6 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     Coroutine sleepingCoroutine;
     Vector3 lockedPosition;
     Quaternion targetRotation;
-    float turnAngle;
     float currentSpeed;
 
 
@@ -79,7 +76,7 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         Vector3 toPlayerDirection = Vector3.Normalize(playerTransform.position - transform.position);
         targetRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(toPlayerDirection, Vector3.up), Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxTurnAngle * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
     }
 
     private void moveShipForward()

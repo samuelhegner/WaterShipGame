@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player Ship Stats", menuName = "Player Ship Statistics")]
-public class PlayerShipStatistics : MovingObjectStatistics
+public class PlayerShipStatistics : PushableObjectStatistics
 {
     [Header("Ship Turning Statistics")]
     public bool turnInMovementDirection = true;
