@@ -8,31 +8,31 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 {
 
 
-    [SerializeField] private float minSpeed;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] [Range(0, 1)] private float turningSpeedLossMultiplier = 0.5f;
+    [SerializeField] private float turningSpeed = 5f;
+    [SerializeField] private float chargeSpeed = 10f;
+    [SerializeField] private float brakeSpeed = 2f;
+    [SerializeField] private float accelerationSpeed = 5f;
     [SerializeField] private float distanceToOvershootCharge = 5f;
-    [SerializeField] float minTurnSpeed = 5f;
-    [SerializeField] float maxTurnSpeed = 10f;
     [SerializeField] [Range(0, 180)] private float maxTurnAngle;
+    [SerializeField] MovementState currentState;
 
 
-    enum MovementState
+    private enum MovementState
     {
         sleeping,
         turning,
-        lockedIn
+        charging
     }
     
-    [SerializeField] MovementState currentState;
 
     Rigidbody enemyShipRigidbody;
     Transform playerTransform;
 
-    Vector3 lockedPosition;
     Coroutine sleepingCoroutine;
-    
+    Vector3 lockedPosition;
+    Quaternion targetRotation;
     float turnAngle;
+    float currentSpeed;
 
 
     void Start()
@@ -64,7 +64,7 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
                     checkIfLockPossible();
                     break;
                 }
-            case MovementState.lockedIn:
+            case MovementState.charging:
                 {
                     moveShipToRamPoint();
                     checkedIfChargePointReached();
@@ -77,42 +77,24 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 
     private void turnShip()
     {
-        turnAngle = calculateSignedTurnAngle();
-        transform.forward = turnForwardToNewDirection(turnAngle);
-    }
-
-    private float calculateSignedTurnAngle()
-    {
-        Vector3 toPlayer = playerTransform.position - transform.position;
-        float angleToPlayer = Vector3.SignedAngle(toPlayer
-                                                 , transform.forward
-                                                 , Vector3.down);
-        return angleToPlayer;
-    }
-
-    private Vector3 turnForwardToNewDirection(float angleToTurn)
-    {
-        float modifiedTurnAngle = turnAngle;
-        float mappedTurnSpeed = FloatExtensions.Map(Math.Abs(modifiedTurnAngle), 0, 180, maxTurnSpeed, minTurnSpeed);
-
-        modifiedTurnAngle = modifiedTurnAngle * (mappedTurnSpeed * Time.fixedDeltaTime);
-        Vector3 movementDirection = Quaternion.AngleAxis(modifiedTurnAngle, Vector3.up) * transform.forward;
-        return movementDirection;
+        Vector3 toPlayerDirection = Vector3.Normalize(playerTransform.position - transform.position);
+        targetRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(toPlayerDirection, Vector3.up), Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, maxTurnAngle * Time.fixedDeltaTime);
     }
 
     private void moveShipForward()
     {
-        float mappedSpeed = FloatExtensions.Map(Mathf.Abs(turnAngle), 0, 180, maxSpeed * turningSpeedLossMultiplier, minSpeed);
-        enemyShipRigidbody.MovePosition(transform.position + (transform.forward * mappedSpeed * Time.fixedDeltaTime));
+        currentSpeed = Mathf.Lerp(currentSpeed, turningSpeed, brakeSpeed * Time.fixedDeltaTime);
+        enemyShipRigidbody.MovePosition(transform.position + (transform.forward * currentSpeed * Time.fixedDeltaTime));
     }
 
     private void checkIfLockPossible()
     {
-        if (Mathf.Abs(turnAngle) < 1f)
+        if (transform.rotation == targetRotation)
         {
             calculateChargePoint();
             
-            currentState = MovementState.lockedIn;
+            currentState = MovementState.charging;
             faceChargeDirection();
         }
     }
@@ -134,7 +116,8 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 
     private void moveShipToRamPoint()
     {
-        enemyShipRigidbody.MovePosition(transform.position + (transform.forward * maxSpeed * Time.fixedDeltaTime));
+        currentSpeed = Mathf.Lerp(currentSpeed, chargeSpeed, accelerationSpeed * Time.fixedDeltaTime);
+        enemyShipRigidbody.MovePosition(transform.position + (transform.forward * currentSpeed * Time.fixedDeltaTime));
     }
 
     private void checkedIfChargePointReached()
