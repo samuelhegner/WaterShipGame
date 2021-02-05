@@ -8,9 +8,9 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField][Range(1, 10)] int startingHealth = 1;
     float currentHealth;
 
-    public Action<float> currentHealthChanged;
+    public event Action<float> currentHealthChanged;
 
-    public Action objectDestroyed;
+    public event Action objectDestroyed;
 
     void Awake()
     {
@@ -36,6 +36,12 @@ public class Health : MonoBehaviour, IDamageable
         if (currentHealth <= 0) 
         {
             objectDestroyed?.Invoke();
+            tempDestroyObject();
         }
+    }
+
+    void tempDestroyObject() 
+    {
+        Destroy(gameObject);
     }
 }

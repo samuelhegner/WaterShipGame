@@ -6,13 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyShipMover : MonoBehaviour, ISleepState
 {
-    [SerializeField] private float turningSpeed = 5f;
-    [SerializeField] private float chargeSpeed = 10f;
-    [SerializeField] private float brakeSpeed = 2f;
-    [SerializeField] private float accelerationSpeed = 5f;
-    [SerializeField] private float distanceToOvershootCharge = 5f;
-    [SerializeField] [Range(0, 180)] private float turnSpeed;
-    [SerializeField] MovementState currentState;
+    [SerializeField] private EnemyShipStatistics enemyShipStats;
+    [SerializeField] private MovementState currentState = MovementState.sleeping; //Serialized field for debugging purposes
 
 
     private enum MovementState
@@ -25,7 +20,6 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 
     Rigidbody enemyShipRigidbody;
     Transform playerTransform;
-
     Coroutine sleepingCoroutine;
     Vector3 lockedPosition;
     Quaternion targetRotation;
@@ -36,8 +30,6 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         enemyShipRigidbody = GetComponent<Rigidbody>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        currentState = MovementState.sleeping;
-        sleepForSeconds(2f);
     }
 
     void FixedUpdate()
@@ -45,6 +37,7 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
         updateShip();
     }
 
+    
 
     private void updateShip()
     {
@@ -76,12 +69,12 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         Vector3 toPlayerDirection = Vector3.Normalize(playerTransform.position - transform.position);
         targetRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(toPlayerDirection, Vector3.up), Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, enemyShipStats.turnSpeed * Time.fixedDeltaTime);
     }
 
     private void moveShipForward()
     {
-        currentSpeed = Mathf.Lerp(currentSpeed, turningSpeed, brakeSpeed * Time.fixedDeltaTime);
+        currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileTurning, enemyShipStats.brakeSpeed * Time.fixedDeltaTime);
         enemyShipRigidbody.MovePosition(transform.position + (transform.forward * currentSpeed * Time.fixedDeltaTime));
     }
 
@@ -100,7 +93,7 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         Vector3 toPointDir = Vector3.Normalize(playerTransform.position - transform.position);
 
-        Vector3 pointToCharge = playerTransform.position + (toPointDir * distanceToOvershootCharge);
+        Vector3 pointToCharge = playerTransform.position + (toPointDir * enemyShipStats.distanceToOvershootCharge);
 
         lockedPosition = pointToCharge;
     }
@@ -113,7 +106,7 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 
     private void moveShipToRamPoint()
     {
-        currentSpeed = Mathf.Lerp(currentSpeed, chargeSpeed, accelerationSpeed * Time.fixedDeltaTime);
+        currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileCharging, enemyShipStats.accelerationSpeed * Time.fixedDeltaTime);
         enemyShipRigidbody.MovePosition(transform.position + (transform.forward * currentSpeed * Time.fixedDeltaTime));
     }
 
@@ -154,6 +147,21 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         currentState = MovementState.sleeping;
         yield return new WaitForSeconds(secondsToSleepFor);
+        currentState = MovementState.turning;
+    }
+
+    private void OnEnable()
+    {
+        GetComponent<EnemyShipAwareness>().playerDetected += playerWasDetected;
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<EnemyShipAwareness>().playerDetected -= playerWasDetected;
+    }
+
+    void playerWasDetected() 
+    {
         currentState = MovementState.turning;
     }
 }
