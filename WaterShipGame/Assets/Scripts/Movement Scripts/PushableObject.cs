@@ -11,11 +11,11 @@ public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
         objectRigidbody = GetComponent<Rigidbody>();
     }
 
-    public virtual void pushObject(float forceToAdd, Vector3 forceDirection)
+    public virtual void pushObject(float forceToAdd, Vector3 forceDirection, ForceMode modeToUse)
     {
         Vector3 directionalForce = forceDirection * forceToAdd;
 
-        objectRigidbody.AddForce(directionalForce, movementStatistics.forceModeToUse);
+        objectRigidbody.AddForce(directionalForce, modeToUse);
     }
 
     public bool isKinematic()

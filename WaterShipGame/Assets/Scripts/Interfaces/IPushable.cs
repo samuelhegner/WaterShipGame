@@ -5,7 +5,7 @@ public interface IPushable
 {
     bool isKinematic();
 
-    void pushObject(float forceToAdd, Vector3 forceDirection);
+    void pushObject(float forceToAdd, Vector3 forceDirection, ForceMode modeToUse);
 
     void bounceObject(Plane planeOfRefection);
     

@@ -14,7 +14,7 @@ public abstract class ObjectPusher : MonoBehaviour
 
         float forceAmmount = calculateForceAmmount(distanceToPushableObject);
 
-        pushableObject.pushObject(forceAmmount, forceDirection);
+        pushableObject.pushObject(forceAmmount, forceDirection, pushingStats.pushForceType);
     }
 
     protected virtual Vector3 calculateForceDirection(Vector3 objectPosition)

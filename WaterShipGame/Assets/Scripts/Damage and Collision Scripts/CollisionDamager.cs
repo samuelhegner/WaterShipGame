@@ -7,10 +7,12 @@ using UnityEngine.Assertions;
 public class CollisionDamager : MonoBehaviour
 {
     [SerializeField] private CollisionDamageStatistics collisionStats;
-    private Health healthOfObject;
-
     public Health HealthOfObject { get => healthOfObject;}
     public CollisionDamageStatistics CollisionStats { get => collisionStats; }
+    public event Action<GameObject> onCollisionEvent;
+
+    private Health healthOfObject;
+
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class CollisionDamager : MonoBehaviour
 
         if (collidableObject != null && collidableObject.CollisionStats.canTakeDamage)
         {
+            onCollisionEvent?.Invoke(collision.gameObject);
             dealCollisionDamage(collidableObject);
         }
     }

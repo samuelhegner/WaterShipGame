@@ -8,6 +8,7 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 {
     [SerializeField] private EnemyShipStatistics enemyShipStats;
     [SerializeField] private MovementState currentState = MovementState.sleeping; //Serialized field for debugging purposes
+    [SerializeField] private float secondsToSleepAfterCollision = 1f;
 
 
     private enum MovementState
@@ -153,11 +154,19 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     private void OnEnable()
     {
         GetComponent<EnemyShipAwareness>().playerDetected += playerWasDetected;
+        GetComponent<CollisionDamager>().onCollisionEvent += sleepAfterCollision;
     }
 
     private void OnDisable()
     {
         GetComponent<EnemyShipAwareness>().playerDetected -= playerWasDetected;
+        GetComponent<CollisionDamager>().onCollisionEvent -= sleepAfterCollision;
+
+    }
+
+    void sleepAfterCollision(GameObject collidingObject) 
+    {
+        sleepForSeconds(secondsToSleepAfterCollision);
     }
 
     void playerWasDetected() 

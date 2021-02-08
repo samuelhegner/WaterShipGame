@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba29e4cba8490504d9c798a0e204c723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 1
+  startingHealth: 10
 --- !u!114 &953619709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +485,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionStats: {fileID: 11400000, guid: 82d029a4e2301a249892a23a6cadd772, type: 2}
+--- !u!114 &953619710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953619707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecb69725cef9339418549f0f66f727e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushingStats: {fileID: 11400000, guid: 437ebad49eb033148b32fcf5d0ee5d36, type: 2}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
