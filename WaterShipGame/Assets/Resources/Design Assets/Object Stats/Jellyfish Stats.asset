@@ -16,4 +16,5 @@ MonoBehaviour:
   minimumBounceSpeed: 10
   maximumVelocity: 2
   distanceBeforeWaypointReached: 1
-  movementSpeed: 0
+  movementSpeed: 2
+  stunDuration: 3

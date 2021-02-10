@@ -8,4 +8,7 @@ public class JellyfishStatistics : PushableObjectStatistics
     public float distanceBeforeWaypointReached = 1f;
     public float movementSpeed;
 
+    [Header("Stun Stats")]
+    public float stunDuration;
+
 }

@@ -9,6 +9,12 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     [SerializeField] private EnemyShipStatistics enemyShipStats;
     [SerializeField] private MovementState currentState = MovementState.sleeping; //Serialized field for debugging purposes
     [SerializeField] private float secondsToSleepAfterCollision = 1f;
+
+    internal void sleepForSeconds(object stunDuration)
+    {
+        throw new NotImplementedException();
+    }
+
     [SerializeField] private float externalForceChargeMultiplier = 2f;
 
 

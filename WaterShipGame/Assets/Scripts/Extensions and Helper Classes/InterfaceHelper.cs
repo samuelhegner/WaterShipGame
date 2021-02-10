@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public static class InterfaceHelper
 {
-
     public static List<T> FindInterfacesOfType<T>()
     {
         List<T> interfaces = new List<T>();

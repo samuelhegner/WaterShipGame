@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Whirlpool Pushing Stats
   m_EditorClassIdentifier: 
   pushForceType: 0
-  maximumPushForce: 0
-  minimumPushForce: 0
+  maximumPushForce: 2
+  minimumPushForce: 0.5
