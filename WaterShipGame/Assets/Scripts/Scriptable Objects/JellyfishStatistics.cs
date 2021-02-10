@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class JellyfishStatistics : ScriptableObject
+[CreateAssetMenu(fileName = "Jellyfish Stats", menuName = "Jellyfish Statistics")]
+public class JellyfishStatistics : PushableObjectStatistics
 {
+    [Header("Waypoint Stats")]
+    public float distanceBeforeWaypointReached = 1f;
+    public float movementSpeed;
 
 }

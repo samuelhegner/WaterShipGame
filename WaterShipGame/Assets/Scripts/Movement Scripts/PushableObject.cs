@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
 {
     [SerializeField] private PushableObjectStatistics movementStatistics;
-    protected Rigidbody objectRigidbody;
-
-    private void Start()
-    {
-        objectRigidbody = GetComponent<Rigidbody>();
-    }
+    [SerializeField] protected Rigidbody objectRigidbody;
 
     public virtual void pushObject(float forceToAdd, Vector3 forceDirection, ForceMode modeToUse)
     {
@@ -60,6 +56,7 @@ public abstract class PushableObject : MonoBehaviour, IPushable, ISpeedDamper
     {
         if (movementStatistics.velocityDamping != 0)
         {
+            Assert.IsNotNull(objectRigidbody); 
             objectRigidbody.velocity -= (movementStatistics.velocityDamping * objectRigidbody.velocity * Time.deltaTime);
         }
     }

@@ -91,7 +91,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439121842}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -231,13 +231,14 @@ GameObject:
   - component: {fileID: 953619708}
   - component: {fileID: 953619709}
   - component: {fileID: 953619710}
+  - component: {fileID: 6355098417832967960}
   m_Layer: 12
   m_Name: EnemyShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6355098417961872362
 Transform:
   m_ObjectHideFlags: 0
@@ -286,6 +287,9 @@ MonoBehaviour:
   enemyShipStats: {fileID: 11400000, guid: 7c07c1cf3ae54db47a7f1fd11c481229, type: 2}
   currentState: 0
   secondsToSleepAfterCollision: 1
+  externalForceChargeMultiplier: 1
+  externalSpeedInfluence: 0
+  externalDirectionInfluence: {x: 0, y: 0, z: 0}
 --- !u!114 &6355098417961872361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +345,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushingStats: {fileID: 11400000, guid: 437ebad49eb033148b32fcf5d0ee5d36, type: 2}
+--- !u!114 &6355098417832967960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355098417961872365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d2a5243b5fb4c45b24c1d0a558391d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeedInfluence: 1.8
+  minSpeedInfluence: 0.2
+  speedChange: 5
 --- !u!1 &6355098418464356197
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6355098418464356194}
   - component: {fileID: 6355098418464356195}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
