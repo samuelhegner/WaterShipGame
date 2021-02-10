@@ -25,7 +25,8 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     Vector3 lockedPosition;
     Quaternion targetRotation;
     float currentSpeed;
-
+    [SerializeField] private float externalSpeedInfluence;
+    [SerializeField] private Vector3 externalDirectionInfluence;
 
     void Start()
     {
@@ -42,10 +43,13 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 
     private void updateShip()
     {
+        calculateCurrentSpeed();
+
         switch (currentState)
         {
             case MovementState.sleeping:
                 {
+                    sitIdle();
                     break;
                 }
             case MovementState.turning:
@@ -66,6 +70,32 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
         }
     }
 
+    private void sitIdle()
+    {
+        if (externalSpeedInfluence != 0) 
+        {
+            enemyShipRigidbody.MovePosition(transform.position + (externalDirectionInfluence * currentSpeed * Time.fixedDeltaTime));
+            targetRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(externalDirectionInfluence, Vector3.up), Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, enemyShipStats.turnSpeed * Time.fixedDeltaTime);
+        }
+    }
+
+    private void calculateCurrentSpeed() 
+    {
+        if (currentState == MovementState.charging)
+        {
+            currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileCharging + externalSpeedInfluence, (enemyShipStats.accelerationSpeed) * Time.fixedDeltaTime);
+        }
+        else if (currentState == MovementState.turning)
+        {
+            currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileTurning + externalSpeedInfluence, (enemyShipStats.brakeSpeed) * Time.fixedDeltaTime);
+        }
+        else 
+        {
+            currentSpeed = externalSpeedInfluence;
+        }
+    }
+
     private void turnShip()
     {
         Vector3 toPlayerDirection = Vector3.Normalize(playerTransform.position - transform.position);
@@ -75,7 +105,6 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 
     private void moveShipForward()
     {
-        currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileTurning, enemyShipStats.brakeSpeed * Time.fixedDeltaTime);
         enemyShipRigidbody.MovePosition(transform.position + (transform.forward * currentSpeed * Time.fixedDeltaTime));
     }
 
@@ -107,7 +136,6 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
 
     private void moveShipToRamPoint()
     {
-        currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileCharging, enemyShipStats.accelerationSpeed * Time.fixedDeltaTime);
         enemyShipRigidbody.MovePosition(transform.position + (transform.forward * currentSpeed * Time.fixedDeltaTime));
     }
 
@@ -155,13 +183,20 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         GetComponent<EnemyShipAwareness>().playerDetected += playerWasDetected;
         GetComponent<CollisionDamager>().onCollisionEvent += sleepAfterCollision;
+        GetComponent<EnemyShipSpeedAffector>().updateInfluence += updateExternalForces;
+    }
+
+    private void updateExternalForces(float speed, Vector3 direction)
+    {
+        externalDirectionInfluence = direction;
+        externalSpeedInfluence = speed;
     }
 
     private void OnDisable()
     {
         GetComponent<EnemyShipAwareness>().playerDetected -= playerWasDetected;
         GetComponent<CollisionDamager>().onCollisionEvent -= sleepAfterCollision;
-
+        GetComponent<EnemyShipSpeedAffector>().updateInfluence -= updateExternalForces;
     }
 
     void sleepAfterCollision(GameObject collidingObject) 
@@ -173,4 +208,5 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         currentState = MovementState.turning;
     }
+
 }
