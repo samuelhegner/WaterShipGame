@@ -9,6 +9,8 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     [SerializeField] private EnemyShipStatistics enemyShipStats;
     [SerializeField] private MovementState currentState = MovementState.sleeping; //Serialized field for debugging purposes
     [SerializeField] private float secondsToSleepAfterCollision = 1f;
+    [SerializeField] private float externalForceChargeMultiplier = 2f;
+
 
 
     private enum MovementState
@@ -76,7 +78,7 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
         {
             enemyShipRigidbody.MovePosition(transform.position + (externalDirectionInfluence * currentSpeed * Time.fixedDeltaTime));
             targetRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(externalDirectionInfluence, Vector3.up), Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, enemyShipStats.turnSpeed * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime);
         }
     }
 
@@ -84,11 +86,15 @@ public class EnemyShipMover : MonoBehaviour, ISleepState
     {
         if (currentState == MovementState.charging)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileCharging + externalSpeedInfluence, (enemyShipStats.accelerationSpeed) * Time.fixedDeltaTime);
+            currentSpeed = Mathf.Lerp(currentSpeed
+                                    , enemyShipStats.speedWhileCharging + (externalSpeedInfluence * externalForceChargeMultiplier)
+                                    , (enemyShipStats.accelerationSpeed) * Time.fixedDeltaTime);
         }
         else if (currentState == MovementState.turning)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, enemyShipStats.speedWhileTurning + externalSpeedInfluence, (enemyShipStats.brakeSpeed) * Time.fixedDeltaTime);
+            currentSpeed = Mathf.Lerp(currentSpeed
+                                    , enemyShipStats.speedWhileTurning + externalSpeedInfluence
+                                    , (enemyShipStats.brakeSpeed) * Time.fixedDeltaTime);
         }
         else 
         {

@@ -52,12 +52,11 @@ public class EnemyShipSpeedAffector : MonoBehaviour
     private void calculateDirectionOfInfluence(Transform influencePosition)
     {
         Vector3 tempDir = influencePosition.position - transform.position;
-        if (tempDir.magnitude > 0.5f) 
-        {
-            directionOfInfluence = tempDir;
-            directionOfInfluence.y = 0;
-        }
-        
+
+        directionOfInfluence = Vector3.Lerp(directionOfInfluence, tempDir, speedChange * Time.deltaTime);
+        directionOfInfluence.y = 0;
+
+
     }
     private void calculateSpeedOfInfluence()
     {
@@ -71,9 +70,9 @@ public class EnemyShipSpeedAffector : MonoBehaviour
         speedOfInfluence = Mathf.Lerp(speedOfInfluence, tempSpeed, speedChange * Time.deltaTime);
     }
 
-    
 
-    
+
+
     private void updateListeners()
     {
         updateInfluence?.Invoke(speedOfInfluence, directionOfInfluence.normalized);

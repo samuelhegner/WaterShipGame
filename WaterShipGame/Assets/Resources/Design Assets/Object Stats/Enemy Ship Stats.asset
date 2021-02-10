@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy Ship Stats
   m_EditorClassIdentifier: 
   speedWhileTurning: 2
-  speedWhileCharging: 8
+  speedWhileCharging: 6
   brakeSpeed: 2
   accelerationSpeed: 5
   distanceToOvershootCharge: 5
