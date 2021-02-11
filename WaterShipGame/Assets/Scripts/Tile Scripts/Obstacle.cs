@@ -8,7 +8,7 @@ public class Obstacle: MonoBehaviour
 
     List<ITileObject> obstacleComponents;
 
-    bool activeObstacle = false;
+    [SerializeField] bool activeObstacle = false;
 
     private void Awake()
     {
@@ -26,8 +26,6 @@ public class Obstacle: MonoBehaviour
 
     public void StartObstacle() 
     {
-        activeObstacle = true;
-
         for (int i = 0; i < obstacleComponents.Count; i++)
         {
             obstacleComponents[i].wakeUp();
@@ -36,7 +34,6 @@ public class Obstacle: MonoBehaviour
 
     public void onObstacleFinished() 
     {
-        activeObstacle = false;
         ResetObstacle();
         obstacleFinished?.Invoke();
     }

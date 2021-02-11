@@ -77,6 +77,5 @@ public class JellyfishMover : PushableObject, ITileObject
         objectRigidbody.velocity = Vector3.zero;
         waypointIndex = 0;
         currentWaypoint = waypoints[waypointIndex];
-        print("Reset Jellyfish Movement");
     }
 }
