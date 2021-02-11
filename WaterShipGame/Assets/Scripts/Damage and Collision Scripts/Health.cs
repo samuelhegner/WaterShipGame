@@ -36,12 +36,12 @@ public class Health : MonoBehaviour, IDamageable
         if (currentHealth <= 0) 
         {
             objectDestroyed?.Invoke();
-            tempDestroyObject();
+            DestroyObject();
         }
     }
 
-    void tempDestroyObject() 
+    void DestroyObject() 
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

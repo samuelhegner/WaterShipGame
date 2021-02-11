@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JellyfishMover : PushableObject
+public class JellyfishMover : PushableObject, ITileObject
 {
     [SerializeField] JellyfishStatistics jellyfishStats;
     [SerializeField] private Transform[] waypoints;
 
 
     Transform currentWaypoint;
-    int waypointIndex = 0;
+    [SerializeField] int waypointIndex = 0;
     Vector3 toWaypoint;
+
+    Vector3 startPosition;
 
     void Start()
     {
+        startPosition = transform.position;
         setCurrentWaypoint();
     }
-
-    
 
     void FixedUpdate()
     {
@@ -60,13 +61,22 @@ public class JellyfishMover : PushableObject
         waypointIndex = (waypointIndex + 1) % waypoints.Length;
     }
 
-    private void OnDrawGizoms()
+    public void wakeUp()
     {
-        /*if (isActiveAndEnabled)
-        {
-            Gizmos.color = new Color(1, 0, 0, 1);
-            Gizmos.DrawWireSphere(currentWaypoint.position, 2);
-        }*/
-        
+        enabled = true;
+    }
+
+    public void fallAsleep()
+    {
+        enabled = false;
+    }
+
+    public void reset()
+    {
+        transform.position = startPosition;
+        objectRigidbody.velocity = Vector3.zero;
+        waypointIndex = 0;
+        currentWaypoint = waypoints[waypointIndex];
+        print("Reset Jellyfish Movement");
     }
 }

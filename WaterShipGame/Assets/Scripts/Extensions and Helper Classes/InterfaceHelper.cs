@@ -4,18 +4,18 @@ using UnityEngine.SceneManagement;
 
 public static class InterfaceHelper
 {
-    public static List<T> FindInterfacesOfType<T>()
+    public static List<T> FindInterfacesOfType<T>(GameObject objectToFindInterfaceIn)
     {
         List<T> interfaces = new List<T>();
         GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
-        foreach (var rootGameObject in rootGameObjects)
+
+        T[] childrenInterfaces = objectToFindInterfaceIn.GetComponentsInChildren<T>();
+        
+        for (int i = 0; i < childrenInterfaces.Length; i++)
         {
-            T[] childrenInterfaces = rootGameObject.GetComponentsInChildren<T>();
-            foreach (var childInterface in childrenInterfaces)
-            {
-                interfaces.Add(childInterface);
-            }
-        }
+            interfaces.Add(childrenInterfaces[i]);
+        } 
+
         return interfaces;
     }
 
